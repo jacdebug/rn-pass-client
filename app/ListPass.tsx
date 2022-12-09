@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {ListItemsComponent} from './ListItemsComponent';
 import {ItemType} from './types';
-import {getLogins} from './utils';
+import {getLogins, addItemKey} from './utils';
 
 export const ListPass = ({section}: {section: ItemType}) => {
   const [listPass, setListPass] = React.useState<ItemType[]>([]);
@@ -14,14 +14,5 @@ export const ListPass = ({section}: {section: ItemType}) => {
     get();
   });
 
-  const siteSectionsMore = Array(30)
-    .fill(0)
-    .flatMap(_ => listPass)
-    .map((e, i) => ({
-      ...e,
-      name: e.name + ' ' + i,
-      key: i,
-    }));
-
-  return <ListItemsComponent list={siteSectionsMore} onSelect={() => {}} />;
+  return <ListItemsComponent list={addItemKey(listPass)} onSelect={() => {}} />;
 };
